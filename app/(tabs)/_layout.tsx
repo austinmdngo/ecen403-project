@@ -34,10 +34,24 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="power"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: 'Power Efficiency',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="light.panel.fill" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="help"
+        options={{
+          title: 'Help Page',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="info" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="about"
+        options={{
+          title: 'About Us',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="questionmark.app.fill" color={color} />,
         }}
       />
     </Tabs>

@@ -4,8 +4,17 @@ import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { Dimensions } from 'react-native';
+import Slider from '@react-native-community/slider';
+import { useState } from 'react';
+import { TextInput } from 'react-native-gesture-handler';
+import { View, Button } from 'react-native';
+
+const screenWidth = Dimensions.get('window').width;
 
 export default function HomeScreen() {
+  const [sliderValue, setSliderValue] = useState(0);
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -20,25 +29,19 @@ export default function HomeScreen() {
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
+        <ThemedText type="subtitle">Temperature Slider</ThemedText>
+        <ThemedText>{sliderValue}</ThemedText>
+        <Slider style={{ width: '100%', height: 40 }} 
+          minimumValue={0} 
+          maximumValue={100}
+          onValueChange={(value) => setSliderValue(value)}
+          step={1}
+          value={sliderValue}
+        />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
+        <Button title="On" onPress={() => <Button title="Off"/>}/>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
@@ -65,10 +68,16 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   reactLogo: {
-    height: 178,
-    width: 290,
+    height: 200,
+    width: screenWidth,
     bottom: 0,
     left: 0,
     position: 'absolute',
+  },
+  input: {
+    margin: 8,
+    borderColor: "#000000",
+    borderWidth: 1,
+    alignSelf: 'center',
   },
 });
