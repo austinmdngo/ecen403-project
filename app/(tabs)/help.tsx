@@ -23,73 +23,40 @@ export default function TabThreeScreen() {
         <ThemedText type="title">Help Page</ThemedText>
       </ThemedView>
       <ThemedText>Below are the steps to help you set up our system:</ThemedText>
-      <Collapsible title="Problem 1:">
+      <Collapsible title="Step 1:">
         <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Problem 2:">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
+        Ensure the system is plugged into a power outlet and verify that the device is powered on (e.g., check for an indicator light).
         </ThemedText>
       </Collapsible>
-      <Collapsible title="Problem 3:">
+      <Collapsible title="Step 2:">
         <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
+          Follow on-screen instructions to connect the system to a Wi-Fi network. Enter Wi-Fi credentials or use an automatic setup option if available.
+          Confirm successful connection before proceeding.
         </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
       </Collapsible>
-      <Collapsible title="Problem 4:">
+      <Collapsible title="Step 3:">
         <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
-          </ThemedText>
+          Place the motion sensor at the entrance of the room or area to be monitored. Ensure it is positioned at a height that allows for optimal detection of movement.
+          Place the camera in a location that provides a clear view of the monitored area. Adjust the camera angle as needed to capture the desired field of view.
+          Place the ambient light sensor in a location that you will be in.
         </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
       </Collapsible>
-      <Collapsible title="Problem 5:">
+      <Collapsible title="Step 4:">
         <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user's current color scheme is, and so you can adjust UI colors accordingly.
+          Choose how the system should adjust lighting throughout the day.
+          Set brightness preferences based on detected motion and ambient light levels.
+          This step can be done through the app or on the device itself.
         </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
       </Collapsible>
-      <Collapsible title="Problem 6:">
+      <Collapsible title="Step 5:">
         <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText>{' '}
-          library to create a waving hand animation.
+          Enable notifications for detected movement.
         </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
+      </Collapsible>
+      <Collapsible title="Step 6:">
+        <ThemedText>
+          Run a test to ensure all sensors and automation features work correctly.
+        </ThemedText>
       </Collapsible>
     </ParallaxScrollView>
   );

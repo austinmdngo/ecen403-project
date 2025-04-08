@@ -7,6 +7,23 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { Alert, View, Button } from 'react-native';
+
+function SignOutButton() {
+  const handleSignOut = () => {
+    Alert.alert('Sign Out', 'Are you sure you want to sign out?', [
+      { text: 'Cancel', style: 'cancel' },
+      { text: 'Sign Out', onPress: () => console.log('User signed out') },
+    ]);
+  };
+
+  return (
+    <View style={{ padding: 10 }}>
+      <Button title="Sign Out" onPress={handleSignOut} color='#ffffff'/>
+    </View>
+  )
+
+};
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();

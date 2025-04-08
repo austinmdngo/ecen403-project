@@ -13,7 +13,7 @@ import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 
 const screenWidth = Dimensions.get('window').width;
 
-export default function HomeScreen() {
+export default function MainScreen() {
   const [sliderValueTemp, setSliderValueTemp] = useState(0);
   const [sliderValueBrightness, setSliderValueBrightness] = useState(0);
   const [offOnPress, setOffOnPress] = useState(0);
@@ -35,7 +35,7 @@ export default function HomeScreen() {
         />
       }>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Context-Aware Lighting Control</ThemedText>
+        <ThemedText type="title">Welcome, Austin</ThemedText>
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
@@ -80,6 +80,37 @@ export default function HomeScreen() {
           step={1}
           value={sliderValueBrightness}
         />
+      </ThemedView>
+      <ThemedView style={styles.stepContainer}>
+      <ThemedText type="subtitle">Modes</ThemedText>
+        <Pressable
+          onPress={() => {
+            setSliderValueBrightness(30);
+            setSliderValueTemp(90);
+          }}
+          style={({pressed}) => [
+            {
+              backgroundColor: pressed ? 'rgb(56, 58, 60)' : 'black',
+            },
+            ]}>
+          {({pressed}) => (
+            <ThemedText type="defaultSemiBold">{pressed ? 'Pressed!' : 'Movie Night'}</ThemedText>
+          )}
+        </Pressable>
+        <Pressable
+          onPress={() => {
+            setSliderValueBrightness(70);
+            setSliderValueTemp(50);
+          }}
+          style={({pressed}) => [
+            {
+              backgroundColor: pressed ? 'rgb(56, 58, 60)' : 'black',
+            },
+            ]}>
+          {({pressed}) => (
+            <ThemedText type="defaultSemiBold">{pressed ? 'Pressed!' : 'Work'}</ThemedText>
+          )}
+        </Pressable>
       </ThemedView>
     </ParallaxScrollView>
   );

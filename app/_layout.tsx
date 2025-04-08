@@ -17,6 +17,7 @@ SplashScreen.preventAutoHideAsync();
 const auth = getAuth();
 
 export default function RootLayout() {
+  // variables
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
@@ -24,17 +25,20 @@ export default function RootLayout() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigation = useNavigation();
 
+  // function to check if user is logged in
   const checkUser = async() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log('User is signed in');
         console.log('--------------------------------------------------------------------------------');
         setIsLoggedIn(true);
+        // if user is logged in, navigate to the tabs
         navigation.navigate('(tabs)' as unknown as never);
       } else {
         console.log('User is not signed in');
         console.log('--------------------------------------------------------------------------------');
         setIsLoggedIn(false);
+        // TODO: if user is not logged in, navigate to the login page, or show failed to log in
       }
     });
   }

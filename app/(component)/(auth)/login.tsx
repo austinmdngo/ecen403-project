@@ -5,15 +5,19 @@ import Ripple from "react-native-material-ripple";
 import { useNavigation } from "expo-router";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { app } from '../api/firebase';
+import { useColorScheme } from "react-native";
 
 const auth = getAuth(app);
 
 export default function LoginScreen() {
+    // variables
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const navigation = useNavigation();
+    const colorScheme = useColorScheme();
 
+    // functions for login and signup
     const handleLogin = async() => {
         try {
             const res = await signInWithEmailAndPassword(auth, userName, password);
@@ -33,7 +37,13 @@ export default function LoginScreen() {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container,
+            {backgroundColor : colorScheme === 'dark' ? '#000' : '#fff'}
+        ]}>
+            {/* Title */}
+            <Text style={styles.title}>Context-Aware Lighting Control</Text>
+
+            {/* input boxes for username & password */}
             <View style={styles.formInputWrapper}>
                 <Octicons name="person" size={20} color="#0005" />
                 <TextInput 
@@ -41,7 +51,7 @@ export default function LoginScreen() {
                     style={styles.input}
                     value={userName}
                     onChangeText={username => setUserName(username)}
-                    placeholder='User Name' />
+                    placeholder='User Name' placeholderTextColor={"#000"}/>
             </View>
             <View style={styles.formInputWrapper}>
                 <Octicons name="shield-lock" size={20} color="#0005" />
@@ -51,9 +61,10 @@ export default function LoginScreen() {
                     value={password}
                     onChangeText={password => setPassword(password)}
                     secureTextEntry={true}
-                    placeholder='Password' />
+                    placeholder='Password' placeholderTextColor={"#000"}/>
             </View>
 
+            {/* Login Button */}
             <Ripple 
                 style={{ marginTop : 20, backgroundColor : '#4CAF50', padding : 10, borderRadius : 5 }}
                 // onPress={() => {
@@ -68,18 +79,12 @@ export default function LoginScreen() {
                 onPress={handleLogin}>
                 <Text style={{ color : '#fff', fontSize : 16 }}>{isLoading ? 'Loading...' : 'Login'}</Text>
             </Ripple>
+            {/* Sign Up Button */}
             <Ripple 
                 style={{ marginTop : 20, backgroundColor : '#4CAF50', padding : 10, borderRadius : 5 }}
-                // onPress={() => {
-                //     // setIsLoading(true);
-                //     // // Simulate a login process
-                //     // setTimeout(() => {
-                //     //     setIsLoading(false);
-                //     //     alert('Login Successful!');
-                //     // }, 2000);
-                //     navigation.navigate('(tabs)' as unknown as never); // temporary navigation to the tabs screen
-                // }}>
-                onPress={handleIsSignup}>
+                onPress={() => {
+                    navigation.navigate('(component)/(auth)/signup' as unknown as never); // navigation to the signup screen
+                }}>
                 <Text style={{ color : '#fff', fontSize : 16 }}>{isLoading ? 'Loading...' : 'Sign Up'}</Text>
             </Ripple>
         </View>
@@ -108,5 +113,12 @@ const styles = StyleSheet.create({
         width : '90%',
         height : '100%',
         marginLeft : 8,
-    }
+    },
+    title: {
+        fontSize: 32,
+        fontWeight: 'bold',
+        color: '#4CAF50',
+        marginBottom: 20,
+        textAlign: 'center',
+    },
 });
