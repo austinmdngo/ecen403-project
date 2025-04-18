@@ -16,23 +16,35 @@ interface ChartData {
   labels: string[];
   datasets: {
     data: number[];
+    color?: (opacity?: number) => string;
   }[];
 }
 
 
 export default function TabTwoScreen() {
   // data variable
-  const [data, setData] = useState<ChartData>({
-    labels: [],
+  const baseData: ChartData = {
+    labels: ['0:00', '3:00', '6:00', '9:00', '12:00', '15:00', '18:00', '21:00', '24:00'],
     datasets: [
       {
-        data: [],
+        data: [10, 20, 15, 30, 25, 35, 40, 30, 20], // Example base data for dataset 1
+        color: (opacity = 0) => `rgba(255, 0, 0, ${opacity})`,
+      },
+      {
+        data: [5, 10, 8, 15, 12, 18, 20, 15, 10], // Example base data for dataset 2
+        color: (opacity = 0) => `rgba(60, 179, 113, ${opacity})`,
       },
     ],
-  });
+  };
 
-  const [totalData1, setTotalData1] = useState(0);
-  const [totalData2, setTotalData2] = useState(0);
+  const [data, setData] = useState<ChartData>(baseData);
+
+  const [totalData1, setTotalData1] = useState(
+    baseData.datasets[0].data.reduce((sum, value) => sum + value, 0)
+  );
+  const [totalData2, setTotalData2] = useState(
+    baseData.datasets[1].data.reduce((sum, value) => sum + value, 0)
+  );
 
   // function to fetch data from the database, currently simulating data
   useEffect(() => {

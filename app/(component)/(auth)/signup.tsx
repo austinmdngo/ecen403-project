@@ -9,6 +9,7 @@ import { useColorScheme } from "react-native";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../api/firebase";
 import { Dimensions } from "react-native";
+import { KeyboardAvoidingView } from "react-native";
 
 const auth = getAuth(app);
 
@@ -27,83 +28,83 @@ export default function SignUpScreen() {
     // function for signup
 
     const handleIsSignup = async() => {
-        try {
-            const res = await createUserWithEmailAndPassword(auth, userName, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                setDoc(doc(db, "users", user.uid), {
-                    Name: name,
-                    Username: userName,
-                    Phone: phone,
-                })
-            }).then(() => alert("Data uploaded successfully"));
-            console.log(res);
-        } catch(er) {
-            console.warn(er);
-        }
+        const res = await createUserWithEmailAndPassword(auth, userName, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            setDoc(doc(db, "users", user.uid), {
+                Name: name,
+                Username: userName,
+                Phone: phone,
+            })
+        }).then(() => alert("Account created successfully!"))
+        .catch((error) => {
+            alert(error.message);
+        });
+        console.log(res);
     }
 
     return (
         <View style={[styles.container,
             {backgroundColor : colorScheme === 'dark' ? '#000' : '#fff'}
         ]}>
-
+            
             {/* Title */}
             <Text style={styles.title}>Sign Up</Text>
+            <KeyboardAvoidingView behavior="padding" style={{ width: '100%' }}>
+                {/* input boxes */}
+                <View style={styles.emailContainer}>
+                    <Text style={styles.emailText}>Name</Text>
+                    <TextInput
+                        style={styles.emailInput}
+                        placeholder="Enter your name"
+                        placeholderTextColor={"#000"}
+                        value={name}
+                        onChangeText={(text) => setName(text)}
+                    />
+                </View>
 
-            {/* input boxes */}
-            <View style={styles.emailContainer}>
-                <Text style={styles.emailText}>Name</Text>
-                <TextInput
-                    style={styles.emailInput}
-                    placeholder="Enter your name"
-                    placeholderTextColor={"#000"}
-                    value={name}
-                    onChangeText={(text) => setName(text)}
-                />
-            </View>
+                <View style={styles.emailContainer}>
+                    <Text style={styles.emailText}>Email</Text>
+                    <TextInput
+                        style={styles.emailInput}
+                        placeholder="Enter your email"
+                        placeholderTextColor={"#000"}
+                        value={userName}
+                        onChangeText={(text) => setUserName(text)}
+                    />
+                </View>
 
-            <View style={styles.emailContainer}>
-                <Text style={styles.emailText}>Email</Text>
-                <TextInput
-                    style={styles.emailInput}
-                    placeholder="Enter your email"
-                    placeholderTextColor={"#000"}
-                    value={userName}
-                    onChangeText={(text) => setUserName(text)}
-                />
-            </View>
+                <View style={styles.emailContainer}>
+                    <Text style={styles.emailText}>Phone Number</Text>
+                    <TextInput
+                        style={styles.emailInput}
+                        placeholder="Enter your phone number"
+                        placeholderTextColor={"#000"}
+                        value={phone?.toString()}
+                        keyboardType="numeric"
+                        onChangeText={(text) => setPhone(text)}
+                    />
+                </View>
 
-            <View style={styles.emailContainer}>
-                <Text style={styles.emailText}>Phone Number</Text>
-                <TextInput
-                    style={styles.emailInput}
-                    placeholder="Enter your phone number"
-                    placeholderTextColor={"#000"}
-                    value={phone?.toString()}
-                    keyboardType="numeric"
-                    onChangeText={(text) => setPhone(text)}
-                />
-            </View>
+                <View style={styles.emailContainer}>
+                    <Text style={styles.emailText}>Password</Text>
+                    <TextInput
+                        style={styles.emailInput}
+                        placeholder="Enter your password"
+                        placeholderTextColor={"#000"}
+                        secureTextEntry={true}
+                        value={password}
+                        onChangeText={(text) => setPassword(text)}
+                    />
+                </View>
 
-            <View style={styles.emailContainer}>
-                <Text style={styles.emailText}>Password</Text>
-                <TextInput
-                    style={styles.emailInput}
-                    placeholder="Enter your password"
-                    placeholderTextColor={"#000"}
-                    secureTextEntry={true}
-                    value={password}
-                    onChangeText={(text) => setPassword(text)}
-                />
-            </View>
-
-            {/* Sign Up Button */}
-            <Ripple 
-                style={{ marginTop : 20, backgroundColor : '#4CAF50', padding : 10, borderRadius : 5 }}
-                onPress={handleIsSignup}>
-                <Text style={{ color : '#fff', fontSize : 16 }}>{isLoading ? 'Loading...' : 'Sign Up'}</Text>
-            </Ripple>
+                {/* Sign Up Button */}
+                <Ripple 
+                    style={{ marginTop : 20, backgroundColor : '#4CAF50', padding : 10, borderRadius : 5 }}
+                    onPress={handleIsSignup}>
+                    <Text style={{ color : '#fff', fontSize : 16 }}>{isLoading ? 'Loading...' : 'Sign Up'}</Text>
+                </Ripple>
+            </KeyboardAvoidingView>
         </View>
     );
 }

@@ -22,17 +22,8 @@ export default function LoginScreen() {
         try {
             const res = await signInWithEmailAndPassword(auth, userName, password);
             console.log(res);
-        } catch(er) {
-            console.warn(er);
-        }
-    }
-
-    const handleIsSignup = async() => {
-        try {
-            const res = await createUserWithEmailAndPassword(auth, userName, password);
-            console.log(res);
-        } catch(er) {
-            console.warn(er);
+        } catch(er: any) {
+            alert(er.message);
         }
     }
 
