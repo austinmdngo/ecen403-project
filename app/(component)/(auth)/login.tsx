@@ -23,7 +23,7 @@ export default function LoginScreen() {
             const res = await signInWithEmailAndPassword(auth, userName, password);
             console.log(res);
         } catch(er: any) {
-            alert(er.message);
+            alert("Incorrect username or password!");
         }
     }
 
