@@ -280,7 +280,7 @@ const styles = StyleSheet.create({
   },
   stepContainer: {
     gap: 8,
-    marginBottom: 8,
+    marginBottom: 10,
   },
   reactLogo: {
     height: 300,
@@ -311,6 +311,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: 200,
     marginTop: 0,
+    marginBottom: 20,
   },
   xAxisLabel: {
     textAlign: 'center',

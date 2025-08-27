@@ -56,7 +56,7 @@ export default function TabThreeScreen() {
           Senior electrical engineering student at Texas A&M University. Power-Delivery Subsystem lead for the Context-Aware Lighting Control Power-Delivery Subsystem.
         </ThemedText>
         <ThemedText>
-          Experience: Electrical Engineer Consultant at Jacobs Engineering
+          Experience: Electrical Design Intern at M&E Consulting
         </ThemedText>
       </Collapsible>
       <Collapsible title="Abraham Sanchez">
@@ -64,7 +64,7 @@ export default function TabThreeScreen() {
           Senior electrical engineering student at Texas A&M University. Microcontroller/Machine Learning lead for the Context-Aware Lighting Control Microcontroller and Machine Learning Subsystems.
         </ThemedText>
         <ThemedText>
-          Experience: 
+          Experience: Electrical Engineer Intern at CMC, Tech Ops Engineer at Amazon
         </ThemedText>
       </Collapsible>
       <Collapsible title="Austin Ngo">
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   },
   stepContainer: {
     gap: 8,
-    marginBottom: 8,
+    marginBottom: 0,
   },
   button: {
     padding: 10,
@@ -114,6 +114,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: 200,
-    marginTop: 30,
+    marginTop: 0,
   },
 });

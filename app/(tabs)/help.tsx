@@ -139,7 +139,7 @@ export default function TabThreeScreen() {
           <ThemedText type="default">Navigate to the Power Efficiency Tab on the bottom tabs to learn how much power you saved using our system.</ThemedText>
         </ThemedView>
 
-        <ThemedView style={styles.stepContainer}>
+        <ThemedView style={styles.stepContainer2}>
           <ThemedText type="subtitle">Sign Out</ThemedText>
           <TouchableOpacity style={styles.button} onPress={Modal}>
             <ThemedText type="defaultSemiBold">Sign Out</ThemedText>
@@ -170,8 +170,13 @@ const styles = StyleSheet.create({
   },
   stepContainer: {
     gap: 8,
-    marginTop: 8,
+    marginTop: 20,
     marginBottom: 8,
+  },
+  stepContainer2: {
+    gap: 8,
+    marginTop: 20,
+    marginBottom: 0,
   },
   button: {
     padding: 10,
@@ -180,7 +185,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: 200,
-    marginTop: 30,
+    marginTop: 0,
   },
   stepLabel: {
     textAlign: 'center', // Center-align the text
@@ -202,7 +207,7 @@ const styles = StyleSheet.create({
   },
   gifStyle: {
     width: '100%', // Full width
-    height: 200, // Adjust height as needed
+    height: 400, // Adjust height as needed
     resizeMode: 'contain', // Ensure the GIF fits within the container
     marginVertical: 20, // Add spacing around the GIF
   },

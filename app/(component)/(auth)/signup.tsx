@@ -10,6 +10,8 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "../api/firebase";
 import { Dimensions } from "react-native";
 import { KeyboardAvoidingView } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native";
 
 const auth = getAuth(app);
 
@@ -47,6 +49,14 @@ export default function SignUpScreen() {
         <View style={[styles.container,
             {backgroundColor : colorScheme === 'dark' ? '#000' : '#fff'}
         ]}>
+            {/* Back Button */}
+            <TouchableOpacity
+                style={styles.backButton}
+                onPress={() => navigation.goBack()} // Navigate back to the login screen
+            >
+                <Ionicons name="arrow-back" size={24} color="#4CAF50" />
+                <Text style={styles.backButtonText}>Back</Text>
+            </TouchableOpacity>
             
             {/* Title */}
             <Text style={styles.title}>Sign Up</Text>
@@ -110,6 +120,18 @@ export default function SignUpScreen() {
 }
 
 const styles = StyleSheet.create({
+    backButton: {
+        flexDirection: "row",
+        alignItems: "center",
+        position: "absolute",
+        top: 50, // Adjust based on your layout
+        left: 20,
+    },
+    backButtonText: {
+        fontSize: 16,
+        color: "#4CAF50",
+        marginLeft: 8,
+    },
     container : {
         flex : 1,
         width : '100%',
