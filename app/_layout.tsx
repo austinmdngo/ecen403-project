@@ -7,6 +7,8 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigation } from 'expo-router';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { router } from 'expo-router';
+
 
 import 'react-native-reanimated';
 
@@ -33,7 +35,7 @@ export default function RootLayout() {
         console.log('--------------------------------------------------------------------------------');
         setIsLoggedIn(true);
         // if user is logged in, navigate to the tabs
-        navigation.navigate('(tabs)' as unknown as never);
+        router.replace('/(tabs)');
       } else {
         console.log('User is not signed in');
         console.log('--------------------------------------------------------------------------------');

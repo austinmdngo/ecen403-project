@@ -18,6 +18,10 @@ import { useNavigation } from 'expo-router';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { updateDoc } from 'firebase/firestore';
 import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
+import { PanResponder } from 'react-native';
+import { useRef } from 'react';
+
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -27,6 +31,8 @@ export default function MainScreen() {
   const [offOnPress, setOffOnPress] = useState(0);
   const [userInfo, setUserInfo] = useState<any | undefined>(null);
   const [userName, setUserName] = useState<any | undefined>(null);
+  const [tempValue, setTempValue] = useState(0);
+  const gradientWidth = 300;
 
   type Mode = 'movieNight' | 'work';
   const [currentMode, setCurrentMode] = useState<Mode | null>(null);
@@ -36,6 +42,28 @@ export default function MainScreen() {
   });
   const [previousValue, setPreviousValue] = useState<{ brightness: number; temperature: number }>({ brightness: 50, temperature: 50 });
   const navigation = useNavigation();
+  const gradientRef = useRef<View>(null);
+  
+
+  const panResponder = PanResponder.create({
+    onStartShouldSetPanResponder: () => true,
+    onPanResponderMove: (evt) => {
+      gradientRef.current?.measure((fx, fy, width, height, px, py) => {
+        const x = evt.nativeEvent.pageX - px;
+        const clampedX = Math.max(0, Math.min(x, gradientWidth));
+        const value = Math.round((clampedX / gradientWidth) * 100);
+        setTempValue(value);
+      });
+    },
+    onPanResponderRelease: (evt) => {
+      gradientRef.current?.measure((fx, fy, width, height, px, py) => {
+        const x = evt.nativeEvent.pageX - px;
+        const clampedX = Math.max(0, Math.min(x, gradientWidth));
+        const value = Math.round((clampedX / gradientWidth) * 100);
+        setTempValue(value);
+      });
+    },
+  });
   
   useEffect(() => {
     const auth = getAuth();
@@ -277,6 +305,38 @@ export default function MainScreen() {
             {currentMode === 'work' ? 'Work (Active)' : 'Work'}
           </ThemedText>
         </Pressable>
+      </ThemedView>
+      <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">Temperature Controller</ThemedText>
+        <ThemedText>{tempValue}</ThemedText>
+        <View
+          ref={gradientRef}
+          style={{ width: gradientWidth, height: 40, borderRadius: 20, overflow: 'hidden' }}
+        >
+          <LinearGradient
+            colors={['#FFFDE4', '#FFD600']}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={{ width: '100%', height: '100%' }}
+          />
+          <View
+            style={{ position: 'absolute', width: '100%', height: '100%' }}
+            {...panResponder.panHandlers}
+          />
+          <View
+            style={{
+              position: 'absolute',
+              left: Math.max(0, Math.min((tempValue / 100) * gradientWidth - 10, gradientWidth - 20)),
+              top: 10,
+              width: 20,
+              height: 20,
+              borderRadius: 10,
+              backgroundColor: '#FFD600',
+              borderWidth: 2,
+              borderColor: '#FFFDE4',
+            }}
+          />
+        </View>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
       <ThemedText type="subtitle">Sign Out</ThemedText>
